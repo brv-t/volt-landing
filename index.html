@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volt - Power Up Your Development Workflow</title>
+    <meta name="description" content="Onboard developers in seconds with one command. Secrets management, task running, and team collaboration built for modern dev teams.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Custom config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        volt: {
+                            50: '#fef9e7',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-8 h-8 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <span class="text-2xl font-bold bg-gradient-to-r from-volt-400 to-volt-600 bg-clip-text text-transparent">volt</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-volt-400 transition">Features</a>
+                    <a href="#pricing" class="text-gray-300 hover:text-volt-400 transition">Pricing</a>
+                    <a href="#docs" class="text-gray-300 hover:text-volt-400 transition">Docs</a>
+                    <a href="https://github.com/yourusername/volt" class="text-gray-300 hover:text-volt-400 transition">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="inline-flex items-center space-x-2 bg-gray-800/50 rounded-full px-4 py-2 mb-8 border border-gray-700">
+                <span class="relative flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-volt-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-volt-500"></span>
+                </span>
+                <span class="text-sm text-gray-300">Beta • Free CLI Forever</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-volt-400 via-volt-500 to-volt-600 bg-clip-text text-transparent">
+                    Power Up
+                </span>
+                <br/>
+                <span class="text-white">Any Project in Seconds</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
+                One command to onboard developers, manage secrets, run tasks, and sync teams. 
+                <span class="text-volt-400">No more 2-hour setup nightmares.</span>
+            </p>
+            
+            <!-- Installation Command -->
+            <div class="max-w-2xl mx-auto mb-8" x-data="{ copied: false }">
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <code class="text-volt-400 text-lg font-mono">uv tool install volt</code>
+                        <button 
+                            @click="navigator.clipboard.writeText('uv tool install volt'); copied = true; setTimeout(() => copied = false, 2000)"
+                            class="ml-4 px-4 py-2 bg-volt-600 hover:bg-volt-700 text-white rounded-md transition text-sm font-medium"
+                            x-text="copied ? 'Copied!' : 'Copy'"
+                        >
+                            Copy
+                        </button>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-2">Then run: <code class="text-volt-400">volt init</code></p>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#features" class="inline-flex items-center justify-center px-8 py-4 bg-volt-600 hover:bg-volt-700 text-white font-semibold rounded-lg shadow-lg transition transform hover:scale-105">
+                    Get Started
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/yourusername/volt" class="inline-flex items-center justify-center px-8 py-4 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg border border-gray-700 transition">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo GIF / Screenshot (placeholder) -->
+    <section class="pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-gray-800 rounded-xl border border-gray-700 shadow-2xl overflow-hidden">
+                <div class="bg-gray-900 px-4 py-3 flex items-center space-x-2 border-b border-gray-700">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-4 text-gray-500 text-sm font-mono">terminal</span>
+                </div>
+                <div class="p-8 font-mono text-sm">
+                    <div class="text-volt-400">$ volt init</div>
+                    <div class="text-gray-400 mt-2">⚡ Initializing Volt...</div>
+                    <div class="text-green-400 mt-1">✓ Created volt.yaml</div>
+                    <div class="text-green-400 mt-1">✓ Installed just + direnv</div>
+                    <div class="text-green-400 mt-1">✓ Vault encrypted</div>
+                    <div class="text-gray-300 mt-4">$ volt secret set DATABASE_URL postgres://...</div>
+                    <div class="text-green-400 mt-1">✓ Secret saved</div>
+                    <div class="text-gray-300 mt-4">$ volt up</div>
+                    <div class="text-gray-400 mt-1">⚡ Starting services...</div>
+                    <div class="text-green-400 mt-1">✓ PostgreSQL (healthy)</div>
+                    <div class="text-green-400 mt-1">✓ Redis (healthy)</div>
+                    <div class="text-green-400 mt-1">✓ API (running on :8000)</div>
+                    <div class="mt-4"><span class="text-volt-400 pulse-glow">▊</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-800/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Everything You Need,
+                    <span class="bg-gradient-to-r from-volt-400 to-volt-600 bg-clip-text text-transparent">Nothing You Don't</span>
+                </h2>
+                <p class="text-xl text-gray-400">Built for modern dev teams who value speed and security</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-volt-600 transition">
+                    <div class="w-12 h-12 bg-volt-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Secrets Management</h3>
+                    <p class="text-gray-400">AES-256-GCM encryption, team sync, RBAC, and audit logs. Your secrets never leave encrypted.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-volt-600 transition">
+                    <div class="w-12 h-12 bg-volt-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Task Runner</h3>
+                    <p class="text-gray-400">One config for linting, formatting, testing, and deployment. Run in parallel for speed.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-volt-600 transition">
+                    <div class="w-12 h-12 bg-volt-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Team Collaboration</h3>
+                    <p class="text-gray-400">Cloud sync for teams. Share secrets, environments, and configs securely across your org.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-volt-600 transition">
+                    <div class="w-12 h-12 bg-volt-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Service Orchestration</h3>
+                    <p class="text-gray-400">Start PostgreSQL, Redis, and your API with one command. Health checks included.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-volt-600 transition">
+                    <div class="w-12 h-12 bg-volt-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Project Templates</h3>
+                    <p class="text-gray-400">Kickstart new projects with <code class="text-volt-400">volt new</code>. Community templates with best practices baked in.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700 hover:border-volt-600 transition">
+                    <div class="w-12 h-12 bg-volt-600/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Enterprise Ready</h3>
+                    <p class="text-gray-400">Audit logs, role-based access control, SSO, and compliance reports. Built for security from day one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    Simple,
+                    <span class="bg-gradient-to-r from-volt-400 to-volt-600 bg-clip-text text-transparent">Transparent Pricing</span>
+                </h2>
+                <p class="text-xl text-gray-400">Free CLI forever. Pay only for team features.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Free Tier -->
+                <div class="bg-gray-900 p-8 rounded-xl border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-2">Solo</h3>
+                    <div class="mb-6">
+                        <span class="text-5xl font-bold">$0</span>
+                        <span class="text-gray-400">/forever</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Full CLI access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Local secrets encryption</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Task runner</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Service orchestration</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Community templates</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-lg border border-gray-700 transition">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Team Tier -->
+                <div class="bg-gradient-to-br from-volt-600/20 to-volt-800/20 p-8 rounded-xl border-2 border-volt-600 relative">
+                    <div class="absolute -top-4 right-8 bg-volt-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                        Most Popular
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Team</h3>
+                    <div class="mb-6">
+                        <span class="text-5xl font-bold">$10</span>
+                        <span class="text-gray-400">/user/month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-volt-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Everything in Solo, plus:</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-volt-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300"><strong>Cloud sync</strong> across team</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-volt-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300"><strong>RBAC</strong> & permissions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-volt-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300"><strong>Audit logs</strong></span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-volt-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300"><strong>Web dashboard</strong></span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-volt-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="text-gray-300">Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 bg-volt-600 hover:bg-volt-700 text-white font-semibold rounded-lg transition shadow-lg shadow-volt-600/50">
+                        Start Free Trial
+                    </button>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-500 mt-8">
+                Enterprise? <a href="mailto:hello@getvolt.sh" class="text-volt-400 hover:text-volt-300">Contact us</a> for custom pricing.
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-volt-600/20 to-volt-800/20 border-y border-volt-600/30">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Ready to <span class="text-volt-400">Power Up</span> Your Workflow?
+            </h2>
+            <p class="text-xl text-gray-400 mb-8">
+                Join thousands of developers shipping faster with Volt
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="bg-gray-900 rounded-lg p-4 border border-gray-700 font-mono text-volt-400">
+                    uv tool install volt
+                </div>
+                <a href="https://github.com/yourusername/volt" class="inline-flex items-center justify-center px-8 py-4 bg-volt-600 hover:bg-volt-700 text-white font-semibold rounded-lg transition">
+                    Read the Docs
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-6 h-6 text-volt-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <span class="text-xl font-bold text-volt-400">volt</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">
+                        Power up your development workflow
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#features" class="text-gray-500 hover:text-volt-400">Features</a></li>
+                        <li><a href="#pricing" class="text-gray-500 hover:text-volt-400">Pricing</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">Templates</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">Changelog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">Documentation</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">API Reference</a></li>
+                        <li><a href="https://github.com/yourusername/volt" class="text-gray-500 hover:text-volt-400">GitHub</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-3 text-gray-300">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">About</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">Blog</a></li>
+                        <li><a href="mailto:hello@getvolt.sh" class="text-gray-500 hover:text-volt-400">Contact</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-volt-400">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">
+                    © 2025 Volt. Built with ⚡ for developers.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="https://twitter.com/getvolt" class="text-gray-500 hover:text-volt-400">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/yourusername/volt" class="text-gray-500 hover:text-volt-400">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                    <a href="https://discord.gg/volt" class="text-gray-500 hover:text-volt-400">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
